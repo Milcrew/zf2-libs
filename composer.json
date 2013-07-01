@@ -1,7 +1,11 @@
 {
-    "name": "spalax/project-starter",
+    "name": "milcrew/zf2-libs",
     "description": "Utilities",
     "authors": [
+        {
+            "name": "Milcrew",
+            "email": "milcrew@gmail.com"
+        },
         {
             "name": "Milotskiy Alexey",
             "email": "spalaxinco@gmail.com"
@@ -18,7 +22,7 @@
     },
     "autoload": {
         "psr-0": {
-            "ProjectStarter": "src/"
+            "Zf2Libs": "src/"
         }
     },
     "minimum-stability": "dev"

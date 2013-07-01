@@ -27,7 +27,7 @@
  *
  *  @author Milotskiy Alexey (aka SpalaX)
  */
-namespace ProjectStarter\Filter;
+namespace Zf2Libs\Filter;
 
 use Zend\Filter\AbstractFilter;
 use Zend\Filter\Word\SeparatorToSeparator;
