@@ -28,7 +28,7 @@
  *  @author Milotskiy Alexey (aka SpalaX)
  */
 
-namespace ZfCommonLibs\Debug;
+namespace Zf2Libs\Debug;
 
 /**
  * @package    Debug
