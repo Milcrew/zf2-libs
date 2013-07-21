@@ -19,7 +19,7 @@
         "php": ">=5.3",
         "zendframework/zendframework": ">=2.0.0",
         "jbroadway/urlify": "dev-master",
-        "ext-fileinfo": ">=1.0.5"
+        "ext-fileinfo": ">=1.*"
     },
     "autoload": {
         "psr-0": {
