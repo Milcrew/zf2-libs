@@ -19,6 +19,8 @@
         "php": ">=5.3",
         "zendframework/zendframework": ">=2.0.0",
         "jbroadway/urlify": "dev-master",
+        "doctrine/doctrine-module": ">=0.7.2",
+        "doctrine/doctrine-orm-module": ">=0.7.0",
         "ext-fileinfo": ">=1.0.0"
     },
     "autoload": {
