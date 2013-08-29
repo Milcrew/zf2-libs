@@ -44,10 +44,23 @@ class Transliterate extends AbstractFilter
      */
     protected $replaceSpacesWithDashes = false;
 
+    /**
+     * @var boolean
+     */
+    protected $replaceSpacesWithSeparator = false;
+
+    /**
+     * @var string
+     */
+    protected $separator = '-';
+
     public function __construct(array $options = array())
     {
         if (array_key_exists('replace_spaces_with_dashes', $options)) {
             $this->replaceSpacesWithDashes = true;
+        } else if (array_key_exists('replace_spaces_with_separator', $options)) {
+            $this->replaceSpacesWithSeparator = true;
+            $this->separator = $options['replace_spaces_with_separator'];
         }
     }
 
@@ -61,7 +74,11 @@ class Transliterate extends AbstractFilter
         if ($this->replaceSpacesWithDashes) {
             $filter = new SeparatorToSeparator(' ', '_');
             $transliterated = $filter->filter($transliterated);
+        } else if ($this->replaceSpacesWithSeparator) {
+            $filter = new SeparatorToSeparator(' ', $this->separator);
+            $transliterated = $filter->filter($transliterated);
         }
+
         return $transliterated;
     }
 }
