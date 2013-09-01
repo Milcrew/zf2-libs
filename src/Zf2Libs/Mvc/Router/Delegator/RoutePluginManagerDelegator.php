@@ -14,6 +14,7 @@ class RoutePluginManagerDelegator implements DelegatorFactoryInterface
     {
         /* @var $routePluginManager RoutePluginManager */
         $routePluginManager = $callback();
+        $routePluginManager->setInvokableClass('CrawlerIndexer', 'Zf2Libs\Mvc\Router\Http\CrawlerIndexer');
         $routePluginManager->setInvokableClass('XRequestedWith', 'Zf2Libs\Mvc\Router\Http\XRequestedWith');
         return $routePluginManager;
     }
