@@ -1,8 +1,8 @@
 <?php
 namespace Zf2Libs\Paginator\Doctrine\ViewModel;
 
-use Zend\Paginator\Paginator;
 use Zend\View\Model\JsonModel as ZendJsonModel;
+use Zf2Libs\Paginator\DojoRestStore\PaginationInterface;
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 
 class JsonModel extends ZendJsonModel
@@ -21,9 +21,9 @@ class JsonModel extends ZendJsonModel
     }
 
     /**
-     * @param Paginator $paginator
+     * @param PaginationInterface $paginator
      */
-    public function setPaginator(Paginator $paginator)
+    public function setPaginator(PaginationInterface $paginator)
     {
         foreach ($paginator->getCurrentItems() as $k=>$item) {
             $this->setVariable($k, $this->extractor->extract($item));

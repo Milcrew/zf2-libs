@@ -2,12 +2,10 @@
 namespace Zf2Libs\Paginator\DojoRestStore;
 
 use Zend\Paginator\Adapter\AdapterInterface;
-use Zend\Paginator\AdapterAggregateInterface;
-use Zend\Paginator\Paginator as PaginatorPaginator;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Http\PhpEnvironment\Response;
 
-class Paginator extends PaginatorPaginator
+class Paginator implements PaginationInterface
 {
     /**
      * @var Request
@@ -20,11 +18,31 @@ class Paginator extends PaginatorPaginator
     protected $response = null;
 
     /**
-     * @param AdapterInterface | AdapterAggregateInterface $adapter
+     * @var int
+     */
+    protected $offset = 0;
+
+    /**
+     * @var int
+     */
+    protected $count = 0;
+
+    /**
+     * @var array | null
+     */
+    protected $currentItems = null;
+
+    /**
+     * @var AdapterInterface
+     */
+    protected $adapter;
+
+    /**
+     * @param AdapterInterface
      * @param Request $request
      * @param Response $response
      */
-    public function __construct($adapter, Request $request, Response $response)
+    public function __construct(AdapterInterface $adapter, Request $request, Response $response)
     {
         $this->request = $request;
         $this->response = $response;
@@ -32,17 +50,44 @@ class Paginator extends PaginatorPaginator
         $hydrator = new RangeHydrator();
         $data = $hydrator->extract($this->request->getHeaders());
 
-        parent::__construct($adapter);
+        $this->offset = $data['offset'];
+        $this->count = $data['count'];
+        $this->adapter = $adapter;
 
-        $this->setItemCountPerPage($data['count']);
-        $offset = ($data['offset'] < 1 ? 1 : $data['offset']);
-        $page = $this->normalizePageNumber(($offset / $this->getItemCountPerPage())+1);
-
-        $this->setCurrentPageNumber($page);
-
-        $hydrator->hydrate(array('totalCount'=>$this->getTotalItemCount(),
-                                 'page'=>$this->getCurrentPageNumber(),
-                                 'itemsOnPage'=>$this->getItemCountPerPage()),
+        $hydrator->hydrate(array('totalCount'=>count($adapter),
+                                 'from'=>$this->offset,
+                                 'to'=>$this->offset+$this->count),
                            $response->getHeaders());
+    }
+
+    /**
+     * Returns the items for the current page.
+     *
+     * @return \Traversable
+     */
+    public function getCurrentItems()
+    {
+        if ($this->currentItems === null) {
+            $this->currentItems = $this->getItems();
+        }
+
+        return $this->currentItems;
+    }
+
+    /**
+     * Returns the items for a given page.
+     *
+     * @param int $pageNumber
+     * @return mixed
+     */
+    protected function getItems()
+    {
+        $items = $this->adapter->getItems($this->offset, $this->count);
+
+        if (!$items instanceof \Traversable) {
+            $items = new \ArrayIterator($items);
+        }
+
+        return $items;
     }
 }
