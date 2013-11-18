@@ -56,15 +56,14 @@ class RangeHydrator implements HydratorInterface
 
         $from = $to = 0;
         if (array_key_exists('itemsOnPage', $data) && array_key_exists('page', $data)) {
-            if ($data['page'] < 1) {
-                $data['page'] = 1;
+            $from = intval($data['page'] * $data['itemsOnPage']);
+            $to = intval(($data['page'] + 1) * $data['itemsOnPage']);
+            if ($to > $count) {
+                $to = $count;
             }
-
-            $from = intval(($data['page'] - 1) * $data['itemsOnPage']);
-            $to = intval($data['page'] * $data['itemsOnPage']);
         }
 
-        $string = "Content-Range: items $from-$to/$count";
+        $string = "Content-Range: items {$from}-{$to}/{$count}";
         $rangeHeader = ContentRange::fromString($string);
         $object->addHeader($rangeHeader);
 
