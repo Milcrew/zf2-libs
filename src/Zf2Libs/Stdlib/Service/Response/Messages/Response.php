@@ -1,8 +1,8 @@
 <?php
 namespace Zf2Libs\Stdlib\Service\Response\Messages;
 
+use Zf2Libs\Stdlib\Messages\MessagesInterface;
 use Zf2Libs\Stdlib\Service\AbstractResponse;
-use Zf2Libs\Stdlib\Service\Response\MessagesInterface;
 
 class Response extends AbstractResponse implements MessagesInterface
 {
