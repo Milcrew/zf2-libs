@@ -14,6 +14,7 @@ class Response extends AbstractResponse implements MessagesInterface
     public function error($message)
     {
         array_push($this->messages, $message);
+        return $this;
     }
 
     /**
