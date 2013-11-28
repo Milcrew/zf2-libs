@@ -1,22 +1,12 @@
 <?php
 namespace Zf2Libs\Paginator\DojoRestStore;
 
+use Zend\Http\Headers;
 use Zend\Paginator\Adapter\AdapterInterface;
-use Zend\Http\PhpEnvironment\Request;
-use Zend\Http\PhpEnvironment\Response;
+use Zf2Libs\Paginator\PaginationInterface;
 
 class Paginator implements PaginationInterface
 {
-    /**
-     * @var Request
-     */
-    protected $request = null;
-
-    /**
-     * @var Response
-     */
-    protected $response = null;
-
     /**
      * @var int
      */
@@ -39,25 +29,24 @@ class Paginator implements PaginationInterface
 
     /**
      * @param AdapterInterface
-     * @param Request $request
-     * @param Response $response
+     * @param Headers $requestHeaders
+     * @param Headers $responseHeaders
      */
-    public function __construct(AdapterInterface $adapter, Request $request, Response $response)
+    public function __construct(AdapterInterface $adapter, Headers $requestHeaders, Headers $responseHeaders)
     {
-        $this->request = $request;
-        $this->response = $response;
-
         $hydrator = new RangeHydrator();
-        $data = $hydrator->extract($this->request->getHeaders());
+        $data = $hydrator->extract($requestHeaders);
 
         $this->offset = $data['offset'];
         $this->count = $data['count'];
         $this->adapter = $adapter;
 
+        $responseHeaders = new Headers();
+
         $hydrator->hydrate(array('totalCount'=>count($adapter),
                                  'from'=>$this->offset,
                                  'to'=>$this->offset+$this->count),
-                           $response->getHeaders());
+                           $responseHeaders);
     }
 
     /**

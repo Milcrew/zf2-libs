@@ -1,5 +1,5 @@
 <?php
-namespace Zf2Libs\Paginator\DojoRestStore;
+namespace Zf2Libs\Paginator;
 
 interface PaginationInterface
 {
