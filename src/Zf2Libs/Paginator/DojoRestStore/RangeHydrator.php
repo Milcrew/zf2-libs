@@ -21,11 +21,11 @@ class RangeHydrator implements HydratorInterface
         }
 
         if (!$rangeHeader = $object->get('Range')) {
-            return array('offset'=>1, 'count'=>1);
+            return array('offset'=>0, 'count'=>1);
         }
 
         if (!preg_match("/^items=(?P<from>[0-9]+)-(?P<to>[0-9]+)$/", $rangeHeader->getFieldValue(), $matches)) {
-            return array('offset' => 1, 'count' => 1);
+            return array('offset' => 0, 'count' => 1);
         }
 
         $count = 0;
