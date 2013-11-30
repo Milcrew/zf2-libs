@@ -20,7 +20,8 @@ class RangeHydrator implements HydratorInterface
             throw new InvalidArgumentException("Invalid object, Headers object expected");
         }
 
-        if (!$rangeHeader = $object->get('Range')) {
+        if (!($rangeHeader = $object->get('Range')) &&
+            !($rangeHeader = $object->get('X-Range'))) {
             return array('offset'=>0, 'count'=>1);
         }
 
