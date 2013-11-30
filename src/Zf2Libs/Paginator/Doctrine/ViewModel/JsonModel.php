@@ -2,7 +2,7 @@
 namespace Zf2Libs\Paginator\Doctrine\ViewModel;
 
 use Zend\View\Model\JsonModel as ZendJsonModel;
-use Zf2Libs\Paginator\DojoRestStore\PaginationInterface;
+use Zf2Libs\Paginator\PaginationInterface;
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 
 class JsonModel extends ZendJsonModel
