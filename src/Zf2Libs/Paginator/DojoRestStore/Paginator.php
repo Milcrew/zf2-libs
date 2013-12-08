@@ -38,10 +38,15 @@ class Paginator implements PaginationInterface
         $data = $hydrator->extract($requestHeaders);
 
         $this->offset = $data['offset'];
+        $totalCount = count($adapter);
+
+        if (!array_key_exists('count', $data)) {
+            $data['count'] = $totalCount;
+        }
         $this->count = $data['count'];
         $this->adapter = $adapter;
 
-        $hydrator->hydrate(array('totalCount'=>count($adapter),
+        $hydrator->hydrate(array('totalCount'=>$totalCount,
                                  'from'=>$this->offset,
                                  'to'=>$this->offset+$this->count),
                            $responseHeaders);

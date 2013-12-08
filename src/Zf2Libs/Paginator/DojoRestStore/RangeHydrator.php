@@ -25,8 +25,12 @@ class RangeHydrator implements HydratorInterface
             return array('offset'=>0, 'count'=>1);
         }
 
-        if (!preg_match("/^items=(?P<from>[0-9]+)-(?P<to>[0-9]+)$/", $rangeHeader->getFieldValue(), $matches)) {
+        if (!preg_match("/^items=(?P<from>[0-9]+)-(?P<to>[0-9]+)?$/", $rangeHeader->getFieldValue(), $matches)) {
             return array('offset' => 0, 'count' => 1);
+        }
+
+        if (!array_key_exists('to', $matches)) {
+            return array('offset'=>$matches['from']);
         }
 
         $count = 0;
