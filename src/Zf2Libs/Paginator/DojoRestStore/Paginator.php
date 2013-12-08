@@ -41,8 +41,6 @@ class Paginator implements PaginationInterface
         $this->count = $data['count'];
         $this->adapter = $adapter;
 
-        $responseHeaders = new Headers();
-
         $hydrator->hydrate(array('totalCount'=>count($adapter),
                                  'from'=>$this->offset,
                                  'to'=>$this->offset+$this->count),
