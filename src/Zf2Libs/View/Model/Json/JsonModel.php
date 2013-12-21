@@ -3,9 +3,9 @@ namespace Zf2Libs\View\Model\Json;
 
 use Zend\View\Model\JsonModel as ZendJsonModel;
 use Zf2Libs\Stdlib\Messages\MessagesInterface as StdlibMessagesInterface;
-use Zf2Libs\View\Model\StatusMessageModelInterface;
+use Zf2Libs\View\Model\StatusMessageDataModelInterface;
 
-class JsonModel extends ZendJsonModel implements StatusMessageModelInterface
+class JsonModel extends ZendJsonModel implements StatusMessageDataModelInterface
 {
     /**
      * @param array | string | StdlibMessagesInterface $messages
@@ -31,6 +31,19 @@ class JsonModel extends ZendJsonModel implements StatusMessageModelInterface
     public function setStatus($status)
     {
         $this->setVariable('status', (int)$status ? 1 : 0);
+        return $this;
+    }
+
+    /**
+     * @param mixed $data
+     * @return $this
+     */
+    public function setData($data)
+    {
+        if (!is_array($data)) {
+            $data = array($data);
+        }
+        $this->setVariable('data', $data);
         return $this;
     }
 
