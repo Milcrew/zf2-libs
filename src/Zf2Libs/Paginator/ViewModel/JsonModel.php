@@ -1,5 +1,5 @@
 <?php
-namespace Zf2Libs\Paginator\Doctrine\ViewModel;
+namespace Zf2Libs\Paginator\ViewModel;
 
 use Zend\View\Model\JsonModel as ZendJsonModel;
 use Zf2Libs\Paginator\PaginationInterface;

@@ -3,12 +3,12 @@ namespace Zf2Libs\View\Model\Json\Specific;
 
 use Zf2Libs\Stdlib\Messages\MessagesInterface;
 use Zf2Libs\View\Model\Json\JsonModel;
-use Zf2Libs\View\Model\StatusMessageModelInterface;
+use Zf2Libs\View\Model\StatusMessageDataModelInterface;
 
-class StatusMessagesModelFactory implements StatusMessagesModelFactoryInterface
+class StatusMessageDataModelFactory implements StatusMessageDataModelFactoryInterface
 {
     /**
-     * @return StatusMessageModelInterface
+     * @return StatusMessageDataModelInterface
      */
     protected function getStatusMessagesModel()
     {
@@ -17,7 +17,7 @@ class StatusMessagesModelFactory implements StatusMessagesModelFactoryInterface
 
     /**
      * @param string | MessagesInterface | array $messages [OPTIONAL]
-     * @return StatusMessageModelInterface
+     * @return StatusMessageDataModelInterface
      */
     public function getFailed($messages = null)
     {
@@ -33,7 +33,7 @@ class StatusMessagesModelFactory implements StatusMessagesModelFactoryInterface
     }
 
     /**
-     * @return StatusMessageModelInterface
+     * @return StatusMessageDataModelInterface
      */
     public function getSuccess()
     {
