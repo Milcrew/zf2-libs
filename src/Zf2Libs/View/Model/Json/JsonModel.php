@@ -2,6 +2,7 @@
 namespace Zf2Libs\View\Model\Json;
 
 use Zend\View\Model\JsonModel as ZendJsonModel;
+use Zf2Libs\Stdlib\Data\DataInterface;
 use Zf2Libs\Stdlib\Messages\MessagesInterface as StdlibMessagesInterface;
 use Zf2Libs\View\Model\StatusMessageDataModelInterface;
 
@@ -35,14 +36,17 @@ class JsonModel extends ZendJsonModel implements StatusMessageDataModelInterface
     }
 
     /**
-     * @param mixed $data
+     * @param string | DataInterface | array $data
      * @return $this
      */
     public function setData($data)
     {
-        if (!is_array($data)) {
+        if ($data instanceof DataInterface) {
+            $data = $data->getData();
+        } else if (!is_array($data)) {
             $data = array($data);
         }
+
         $this->setVariable('data', $data);
         return $this;
     }

@@ -1,6 +1,7 @@
 <?php
 namespace Zf2Libs\View\Model\Json\Specific;
 
+use Zf2Libs\Stdlib\Data\DataInterface;
 use Zf2Libs\Stdlib\Messages\MessagesInterface;
 use Zf2Libs\View\Model\Json\JsonModel;
 use Zf2Libs\View\Model\StatusMessageDataModelInterface;
@@ -10,7 +11,7 @@ class StatusMessageDataModelFactory implements StatusMessageDataModelFactoryInte
     /**
      * @return StatusMessageDataModelInterface
      */
-    protected function getStatusMessagesModel()
+    protected function getStatusMessagesDataModel()
     {
         return new JsonModel();
     }
@@ -21,23 +22,29 @@ class StatusMessageDataModelFactory implements StatusMessageDataModelFactoryInte
      */
     public function getFailed($messages = null)
     {
-        $statusMessagesModel = $this->getStatusMessagesModel();
+        $statusMessagesDataModel = $this->getStatusMessagesDataModel();
 
-        $statusMessagesModel->fail();
+        $statusMessagesDataModel->fail();
 
         if (!is_null($messages)) {
-            $statusMessagesModel->setMessage($messages);
+            $statusMessagesDataModel->setMessage($messages);
         }
 
-        return $statusMessagesModel;
+        return $statusMessagesDataModel;
     }
 
     /**
+     * @param DataInterface | array $data [OPTIONAL]
      * @return StatusMessageDataModelInterface
      */
-    public function getSuccess()
+    public function getSuccess($data = null)
     {
-        $statusMessagesModel = $this->getStatusMessagesModel();
-        return $statusMessagesModel->success();
+        $statusMessagesDataModel = $this->getStatusMessagesDataModel();
+
+        if (!is_null($data)) {
+            $statusMessagesDataModel->setData($data);
+        }
+
+        return $statusMessagesDataModel->success();
     }
 }
