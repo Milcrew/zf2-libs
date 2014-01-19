@@ -5,7 +5,7 @@ use Zend\View\Model\JsonModel as ZendJsonModel;
 use Zf2Libs\Paginator\PaginationInterface;
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 
-class JsonModel extends ZendJsonModel
+class JsonModel extends ZendJsonModel implements JsonModelInterface
 {
     /**
      * @var ExtractorInterface
