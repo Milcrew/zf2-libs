@@ -1,7 +1,7 @@
 <?php
 namespace Zf2Libs\View\Model\Json\Specific;
 
-use Zf2Libs\Stdlib\Data\DataInterface;
+use Zf2Libs\Response\DataInterface;
 use Zf2Libs\Stdlib\Messages\MessagesInterface;
 use Zf2Libs\View\Model\Json\JsonModel;
 use Zf2Libs\View\Model\StatusMessageDataModelInterface;
