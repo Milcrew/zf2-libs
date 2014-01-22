@@ -1,7 +1,7 @@
 <?php
 namespace Zf2Libs\Service\Response;
 
-use Zf2Libs\Response\DataInterface as DataDataInterface;
+use Zf2Libs\Stdlib\Response\DataInterface as DataDataInterface;
 
 interface DataInterface extends DataDataInterface
 {

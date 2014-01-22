@@ -4,7 +4,7 @@ namespace Zf2Libs\Stdlib\Service\Response\Messages;
 use Zf2Libs\Stdlib\Messages\MessagesInterface;
 use Zf2Libs\Stdlib\Service\AbstractResponse;
 
-interface ResponseMessagesInterface extends MessagesInterface
+interface ResponseInterface extends MessagesInterface
 {
     /**
      * @param string $message

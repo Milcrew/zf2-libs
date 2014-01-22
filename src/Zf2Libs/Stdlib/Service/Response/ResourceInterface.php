@@ -1,5 +1,5 @@
 <?php
-namespace Zf2Libs\Service\Response;
+namespace Zf2Libs\Stdlib\Service\Response;
 
 interface ResourceInterface
 {

@@ -3,7 +3,7 @@ namespace Zf2Libs\Stdlib\Service\Response\Messages;
 
 use Zf2Libs\Stdlib\Service\AbstractResponse;
 
-class Response extends AbstractResponse implements ResponseMessagesInterface
+class Response extends AbstractResponse implements ResponseInterface
 {
     protected $messages = array();
 

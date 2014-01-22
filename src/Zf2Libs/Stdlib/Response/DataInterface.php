@@ -1,5 +1,5 @@
 <?php
-namespace Zf2Libs\Response;
+namespace Zf2Libs\Stdlib\Response;
 
 interface DataInterface
 {

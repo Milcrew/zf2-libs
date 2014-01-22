@@ -2,7 +2,7 @@
 namespace Zf2Libs\View\Model\Json;
 
 use Zend\View\Model\JsonModel as ZendJsonModel;
-use Zf2Libs\Response\DataInterface;
+use Zf2Libs\Stdlib\Response\DataInterface;
 use Zf2Libs\Stdlib\Messages\MessagesInterface as StdlibMessagesInterface;
 use Zf2Libs\View\Model\StatusMessageDataModelInterface;
 
