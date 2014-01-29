@@ -87,7 +87,8 @@ class CrawlerIndexer implements RouteInterface
         /* @var $query Parameters */
         $query = $request->getQuery();
 
-        if (!($query->get($this->queryParam, false))) {
+
+        if ($query->get($this->queryParam, false) === false) {
             return null;
         }
 
