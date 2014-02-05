@@ -20,13 +20,11 @@ class RangeHydrator implements HydratorInterface
             throw new InvalidArgumentException("Invalid object, Headers object expected");
         }
 
-        if (!($rangeHeader = $object->get('Range')) &&
-            !($rangeHeader = $object->get('X-Range'))) {
-            return array('offset'=>0, 'count'=>1);
-        }
-
-        if (!preg_match("/^items=(?P<from>[0-9]+)-(?P<to>[0-9]+)?$/", $rangeHeader->getFieldValue(), $matches)) {
-            return array('offset' => 0, 'count' => 1);
+        if ((!($rangeHeader = $object->get('Range')) &&
+            !($rangeHeader = $object->get('X-Range'))) ||
+            !preg_match("/^items=(?P<from>[0-9]+)-(?P<to>[0-9]+)?$/",
+                        $rangeHeader->getFieldValue(), $matches)) {
+            return array('offset'=>0);
         }
 
         if (!array_key_exists('to', $matches)) {
