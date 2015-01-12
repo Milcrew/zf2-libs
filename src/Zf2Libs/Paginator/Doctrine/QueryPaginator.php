@@ -12,9 +12,10 @@ class QueryPaginator extends DoctrineAdapterPaginator
 {
     /**
      * @param Query | QueryBuilder $query
+     * @param bool $fetchJoinCollection [OPTIONAL]
      */
-    public function __construct($query)
+    public function __construct($query, $fetchJoinCollection = true)
     {
-        parent::__construct(new DoctrinePaginator($query));
+        parent::__construct(new DoctrinePaginator($query, $fetchJoinCollection));
     }
 }
