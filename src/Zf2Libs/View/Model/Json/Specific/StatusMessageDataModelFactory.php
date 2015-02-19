@@ -17,34 +17,62 @@ class StatusMessageDataModelFactory implements StatusMessageDataModelFactoryInte
     }
 
     /**
-     * @param string | MessagesInterface | array $messages [OPTIONAL]
+     * @param string | MessagesInterface | DataInterface | array $response [OPTIONAL]
      * @return StatusMessageDataModelInterface
      */
-    public function getFailed($messages = null)
+    public function getFailed($response = null)
     {
         $statusMessagesDataModel = $this->getStatusMessagesDataModel();
-
         $statusMessagesDataModel->fail();
 
-        if (!is_null($messages)) {
-            $statusMessagesDataModel->setMessage($messages);
+        if (!is_null($response) && (is_array($response) ||
+                                    is_string($response) ||
+                                    $response instanceof MessagesInterface) ) {
+            $statusMessagesDataModel->setMessage( $response );
+        }
+
+        if (!is_null($response) && $response instanceof DataInterface ) {
+            $statusMessagesDataModel->setData( $response );
         }
 
         return $statusMessagesDataModel;
     }
 
     /**
-     * @param DataInterface | array $data [OPTIONAL]
-     * @return StatusMessageDataModelInterface
+     * @param StatusMessageDataModelInterface $statusMessagesDataModel
+     * @param $response
      */
-    public function getSuccess($data = null)
+    protected function processResponse(StatusMessageDataModelInterface $statusMessagesDataModel, $response)
     {
-        $statusMessagesDataModel = $this->getStatusMessagesDataModel();
-
-        if (!is_null($data)) {
-            $statusMessagesDataModel->setData($data);
+        if (!is_null($response) && (is_array($response) ||
+                                    is_string($response) ||
+                                    $response instanceof MessagesInterface) ) {
+            $statusMessagesDataModel->setMessage( $response );
         }
 
-        return $statusMessagesDataModel->success();
+        if (!is_null($response) && $response instanceof DataInterface ) {
+            $statusMessagesDataModel->setData( $response );
+        }
+    }
+
+    /**
+     * @param string | MessagesInterface | DataInterface | array $response [OPTIONAL]
+     * @return StatusMessageDataModelInterface
+     */
+    public function getSuccess($response = null)
+    {
+        $statusMessagesDataModel = $this->getStatusMessagesDataModel();
+        $statusMessagesDataModel->success();
+        if (!is_null($response) && (is_array($response) ||
+                                    is_string($response) ||
+                                    ($response instanceof MessagesInterface &&
+                                     count($response->getMessages()))) ) {
+            $statusMessagesDataModel->setMessage( $response );
+        }
+
+        if (!is_null($response) && $response instanceof DataInterface ) {
+            $statusMessagesDataModel->setData( $response );
+        }
+        return $statusMessagesDataModel;
     }
 }
